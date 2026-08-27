@@ -1,0 +1,99 @@
+#九工大学研ヒルズwaypoint
+waypoints:
+#往路九工大前
+- latitude: 33.890025
+  longitude: 130.7106361
+- latitude: 33.89005
+  longitude: 130.7107806
+- latitude: 33.89002222
+  longitude: 130.7108194
+- latitude: 33.88999444
+  longitude: 130.7108167
+- latitude: 33.88993889
+  longitude: 130.7106417
+- latitude: 33.8899
+  longitude: 130.7105306
+- latitude: 33.88989167
+  longitude: 130.7104944
+- latitude: 33.889825
+  longitude: 130.7101556
+- latitude: 33.88981667
+  longitude: 130.7101278
+- latitude: 33.88974444
+  longitude: 130.7098333
+
+#往路早稲田前
+- latitude: 33.88968333
+  longitude: 130.7095806
+- latitude: 33.8896
+  longitude: 130.7092556
+- latitude: 33.88951389
+  longitude: 130.7088639
+- latitude: 33.88942778
+  longitude: 130.7085444
+- latitude: 33.88935833
+  longitude: 130.7082639
+- latitude: 33.88929167
+  longitude: 130.7080028
+- latitude: 33.88939167
+  longitude: 130.7078889
+
+#往路坂道
+- latitude: 33.88952222
+  longitude: 130.7078
+- latitude: 33.88965278
+  longitude: 130.7077222
+- latitude: 33.88985278
+  longitude: 130.7076028
+- latitude: 33.89003889
+  longitude: 130.7074917
+- latitude: 33.89020556
+  longitude: 130.7073833
+- latitude: 33.89026944
+  longitude: 130.7073278
+- latitude: 33.89029722
+  longitude: 130.7072611
+
+#坂道終わりの平面
+- latitude: 33.89024444
+  longitude: 130.7071583
+- latitude: 33.890275
+  longitude: 130.7071028
+- latitude: 33.89030833
+  longitude: 130.7070944
+- latitude: 33.89031111
+  longitude: 130.7071611
+
+#復路坂道
+- latitude: 33.89029722
+  longitude: 130.7072611
+- latitude: 33.89026944
+  longitude: 130.7073278
+- latitude: 33.89020556
+  longitude: 130.7073833
+- latitude: 33.89003889
+  longitude: 130.7074917
+- latitude: 33.88985278
+  longitude: 130.7076028
+- latitude: 33.88965278
+  longitude: 130.7077222
+- latitude: 33.88952222
+  longitude: 130.7078
+
+#復路早稲田前
+- latitude: 33.88939167
+  longitude: 130.7078889
+- latitude: 33.88929167
+  longitude: 130.7080028
+- latitude: 33.88935833
+  longitude: 130.7082639
+- latitude: 33.88942778
+  longitude: 130.7085444
+- latitude: 33.88951389
+  longitude: 130.7088639
+- latitude: 33.8896
+  longitude: 130.709255
+- latitude: 33.88968889
+  longitude: 130.7094306
+- latitude: 33.88991389
+  longitude: 130.7102972

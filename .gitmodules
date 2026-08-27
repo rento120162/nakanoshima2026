@@ -1,0 +1,21 @@
+[submodule "FAST_LIO_ROS2"]
+	path = FAST_LIO_ROS2
+	url = https://github.com/NR-2716/FAST_LIO_ROS2.git
+[submodule "lidar_localization_ros2"]
+	path = lidar_localization_ros2
+	url = https://github.com/rsasaki0109/lidar_localization_ros2.git
+[submodule "livox_ros_driver2"]
+	path = livox_ros_driver2
+	url = https://github.com/Ericsii/livox_ros_driver2.git
+[submodule "ndt_omp_ros2"]
+	path = ndt_omp_ros2
+	url = https://github.com/rsasaki0109/ndt_omp_ros2.git
+[submodule "obstacle_cloud_to_scan"]
+	path = obstacle_cloud_to_scan
+	url = https://github.com/AbudoriLab-TC2024/obstacle_cloud_to_scan.git
+[submodule "robot_localization"]
+	path = robot_localization
+	url = https://github.com/NR-2716/robot_localization.git
+[submodule "unitree_ros2"]
+	path = unitree_ros2
+	url = https://github.com/NR-2716/unitree_ros2.git

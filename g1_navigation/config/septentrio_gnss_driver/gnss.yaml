@@ -1,0 +1,28 @@
+device: tcp://192.168.3.1:28784
+
+serial:
+  baudrate: 921600
+
+configure_rx: true
+
+login:
+  user: ""
+  password: ""
+
+frame_id: gnss_link
+
+polling_period:
+  pvt: 100
+  rest: 500
+
+use_gnss_time: false
+ntp_server: true
+ptp_server_clock: false
+latency_compensation: true
+
+publish:
+  publish_only_valid: true
+  navsatfix: true
+  diagnostics: false
+
+activate_debug_log: true
