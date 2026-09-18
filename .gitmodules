@@ -19,3 +19,12 @@
 [submodule "unitree_ros2"]
 	path = unitree_ros2
 	url = https://github.com/NR-2716/unitree_ros2.git
+[submodule "micro_ros/micro_ros_setup"]
+	path = micro_ros/micro_ros_setup
+	url = https://github.com/micro-ROS/micro_ros_setup.git
+[submodule "micro_ros/uros/micro-ROS-Agent"]
+	path = micro_ros/uros/micro-ROS-Agent
+	url = https://github.com/micro-ROS/micro-ROS-Agent.git
+[submodule "micro_ros/uros/micro_ros_msgs"]
+	path = micro_ros/uros/micro_ros_msgs
+	url = https://github.com/micro-ROS/micro_ros_msgs.git
