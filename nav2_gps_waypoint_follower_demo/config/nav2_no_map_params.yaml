@@ -119,7 +119,7 @@ controller_server:
       sim_time: 2.0
       linear_granularity: 0.05
       angular_granularity: 0.025
-      transform_tolerance: 0.5
+      transform_tolerance: 5.0
       xy_goal_tolerance: 1.0
       trans_stopped_velocity: 0.02
       short_circuit_trajectory_evaluation: True
@@ -143,13 +143,13 @@ local_costmap:
       use_sim_time: False
       update_frequency: 5.0
       publish_frequency: 4.0
-      global_frame: base_link
+      global_frame: odom
       robot_base_frame: base_link
       rolling_window: True
       width: 10
       height: 10
       resolution: 0.1
-      robot_radius: 1.0
+      robot_radius: 0.8
       plugins: ["obstacle_layer", "inflation_layer"]
       obstacle_layer:
         plugin: "nav2_costmap_2d::ObstacleLayer"
@@ -169,7 +169,7 @@ local_costmap:
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         cost_scaling_factor: 2.0
-        inflation_radius: 0.8
+        inflation_radius: 0.6
       always_send_full_costmap: True
 
 # GPS WPF CHANGE: Remove static layer
@@ -181,7 +181,7 @@ global_costmap:
       publish_frequency: 8.0
       global_frame: map
       robot_base_frame: base_link
-      robot_radius: 1.0
+      robot_radius: 0.8
       resolution: 0.1
       # When using GPS navigation you will potentially traverse huge environments which are not practical to
       # fit on a big static costmap. Thus it is recommended to use a rolling global costmap large enough to 
@@ -212,8 +212,8 @@ global_costmap:
           inf_is_valid: true
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
-        cost_scaling_factor: 3.5
-        inflation_radius: 1.2
+        cost_scaling_factor: 3.0
+        inflation_radius: 0.8
       always_send_full_costmap: True
 
 # The yaml_filename does not need to be specified since it going to be set by defaults in launch.
@@ -284,7 +284,7 @@ behavior_server:
     local_frame: odom
     global_frame: map
     robot_base_frame: base_link
-    transform_tolerance: 0.5
+    transform_tolerance: 5.0
     simulate_ahead_time: 2.0
     max_rotational_vel: 3.0
     min_rotational_vel: 0.2

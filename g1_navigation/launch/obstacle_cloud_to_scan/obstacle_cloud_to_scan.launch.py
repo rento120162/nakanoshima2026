@@ -19,7 +19,7 @@ def generate_launch_description():
                 'input_topic': '/velodyne_points',
                 'output_topic': '/obstacle_cloud', # pointcloud_to_laserscanに入力
                 'ground_remove_algorithm': 'NORMAL',
-                'voxel_leaf_size': 0.1,
+                'voxel_leaf_size': 0.25,
                 'robot_box_size': [0.5, 0.2, 1.5],
                 'robot_box_position': [0.0, 0.0, 0.0],
                 
@@ -29,7 +29,7 @@ def generate_launch_description():
                 'obstacle_detection_range_y_min': -10.0,
                 'obstacle_detection_range_y_max': 10.0,
                 'obstacle_detection_range_z_min': -0.5,
-                'obstacle_detection_range_z_max': 1.5,  # Default: robot_box_size[2] + 0.3
+                'obstacle_detection_range_z_max': 2.0,  # Default: robot_box_size[2] + 0.3
                 'normal_max_slope_angle': 25.0,
                 'pmf_max_window_size': 33,
                 'pmf_slope': 1.0,
@@ -76,7 +76,7 @@ def generate_launch_description():
                 'angle_min': -3.1415,  # -M_PI/2
                 'angle_max': 3.1415,   # M_PI/2
                 'angle_increment': 0.0174,  # M_PI/360.0
-                'scan_time': 0.1,
+                'scan_time': 0.2,
                 'range_min': 0.2,
                 'range_max': 8.0,
                 'use_inf': True,

@@ -83,8 +83,7 @@ def main():
     rclpy.init()
 
     # allow to pass the waypoints file as an argument
-    default_yaml_file_path = os.path.join(get_package_share_directory(
-        "node"), "config", "demo_waypoints.yaml")
+    default_yaml_file_path = os.path.join(get_package_share_directory("nav2_gps_waypoint_follower_demo"), "config", "demo_waypoints.yaml")
     if len(sys.argv) > 1:
         yaml_file_path = sys.argv[1]
     else:
