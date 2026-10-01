@@ -24,11 +24,5 @@ def generate_launch_description():
             remappings=[
                 ("fix", "gps/fix"),
             ],
-        ),
-        launch_ros.actions.Node(
-            package="tf2_ros",
-            executable="static_transform_publisher",
-            name="swri_transform",
-            arguments=["0", "0", "0", "0", "0", "0", "map", "origin"]
         )
     ])

@@ -36,17 +36,17 @@ def generate_launch_description():
         source_file=nav2_params, root_key="", param_rewrites="", convert_types=True
     )
 
-    use_rviz = LaunchConfiguration('use_rviz')
+    #use_rviz = LaunchConfiguration('use_rviz')
     use_mapviz = LaunchConfiguration('use_mapviz')
 
-    declare_use_rviz_cmd = DeclareLaunchArgument(
-        'use_rviz',
-        default_value='true',
-        description='Whether to start RVIZ')
+    #declare_use_rviz_cmd = DeclareLaunchArgument(
+    #    'use_rviz',
+    #    default_value='False',
+    #    description='Whether to start RVIZ')
 
     declare_use_mapviz_cmd = DeclareLaunchArgument(
         'use_mapviz',
-        default_value='False',
+        default_value='True',
         description='Whether to start mapviz')
 
     #gazebo_cmd = IncludeLaunchDescription(
@@ -64,17 +64,17 @@ def generate_launch_description():
             os.path.join(bringup_dir, "launch", "navigation_launch.py")
         ),
         launch_arguments={
-            "use_sim_time": "False",
+            "use_sim_time": "True",
             "params_file": configured_params,
             "autostart": "True",
         }.items(),
     )
 
-    rviz_cmd = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(bringup_dir, "launch", 'rviz_launch.py')),
-        condition=IfCondition(use_rviz)
-    )
+    #rviz_cmd = IncludeLaunchDescription(
+    #    PythonLaunchDescriptionSource(
+    #        os.path.join(bringup_dir, "launch", 'rviz_launch.py')),
+    #    condition=IfCondition(use_rviz)
+    #)
 
     mapviz_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -88,6 +88,9 @@ def generate_launch_description():
     # simulator launch
     #ld.add_action(gazebo_cmd)
 
+    ld.add_action(declare_use_mapviz_cmd)
+    ld.add_action(mapviz_cmd)
+
     # robot localization launch
     ld.add_action(robot_localization_cmd)
 
@@ -95,9 +98,8 @@ def generate_launch_description():
     ld.add_action(navigation2_cmd)
 
     # viz launch
-    ld.add_action(declare_use_rviz_cmd)
-    ld.add_action(rviz_cmd)
-    ld.add_action(declare_use_mapviz_cmd)
-    ld.add_action(mapviz_cmd)
+    #ld.add_action(declare_use_rviz_cmd)
+    #ld.add_action(rviz_cmd)
+    
 
     return ld

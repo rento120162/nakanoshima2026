@@ -15,8 +15,8 @@ def generate_launch_description():
             # arguments=['--ros-args', '--log-level', 'debug'],
             output='screen',
             parameters=[{
-                'target_frame': 'livox_frame',
-                'input_topic': '/livox_lidar_fixed',
+                'target_frame': 'velodyne_base_link',
+                'input_topic': '/velodyne_points',
                 'output_topic': '/obstacle_cloud', # pointcloud_to_laserscanに入力
                 'ground_remove_algorithm': 'NORMAL',
                 'voxel_leaf_size': 0.1,
@@ -24,11 +24,11 @@ def generate_launch_description():
                 'robot_box_position': [0.0, 0.0, 0.0],
                 
                 # Obstacle detection range parameters (X, Y, Z PassThrough filter)
-                'obstacle_detection_range_x_min': -2.0,
-                'obstacle_detection_range_x_max': 5.0,
-                'obstacle_detection_range_y_min': -2.0,
-                'obstacle_detection_range_y_max': 2.0,
-                'obstacle_detection_range_z_min': -1.0,
+                'obstacle_detection_range_x_min': -5.0,
+                'obstacle_detection_range_x_max': 10.0,
+                'obstacle_detection_range_y_min': -10.0,
+                'obstacle_detection_range_y_max': 10.0,
+                'obstacle_detection_range_z_min': -0.5,
                 'obstacle_detection_range_z_max': 1.5,  # Default: robot_box_size[2] + 0.3
                 'normal_max_slope_angle': 25.0,
                 'pmf_max_window_size': 33,
@@ -50,7 +50,7 @@ def generate_launch_description():
                 'hole_detection_enabled': False,
                 'hole_detection_algorithm': 'BASIC',
                 'hole_output_topic': '/hole_cloud/cloud',
-                'lidar_frame': 'livox_frame',
+                'lidar_frame': 'velodyne_base_link',
                 'hole_detection_range_x': 3.0,
                 'hole_detection_range_y': 5.0,
                 'hole_detection_max_height': 0.3,
@@ -69,10 +69,10 @@ def generate_launch_description():
                 ('scan', '/obstacle_scan')  # 通常のトピック名に合わせる
             ],
             parameters=[{
-                'target_frame': 'livox_frame',  # 空文字列から修正
+                'target_frame': 'velodyne_base_link',  # 空文字列から修正
                 'transform_tolerance': 0.01,
-                'min_height': -1.0,
-                'max_height': 1.0,
+                'min_height': -0.5,
+                'max_height': 1.5,
                 'angle_min': -3.1415,  # -M_PI/2
                 'angle_max': 3.1415,   # M_PI/2
                 'angle_increment': 0.0174,  # M_PI/360.0
