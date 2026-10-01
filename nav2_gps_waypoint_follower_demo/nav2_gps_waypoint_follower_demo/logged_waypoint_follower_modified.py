@@ -6,6 +6,7 @@ import os
 import sys
 import time
 import math
+import threading 
 from rclpy.node import Node
 from sensor_msgs.msg import NavSatFix
 from geometry_msgs.msg import PoseStamped
@@ -14,23 +15,26 @@ from tf2_ros import LookupException, ConnectivityException, ExtrapolationExcepti
 
 
 class YamlWaypointParser:
-    """
-    YamlファイルからGPSウェイポイントをパースするクラス
-    """
     def __init__(self, wps_file_path: str) -> None:
         with open(wps_file_path, 'r') as wps_file:
             self.wps_dict = yaml.safe_load(wps_file)
 
     def get_wps(self):
         """
-        [{"lat": 緯度, "lon": 経度, "yaw": 方位}] の辞書リストを返す
+        [{"latitude": 緯度, "longitude": 経度, "action": タスク名, "value": 引数}] のリストを返す
         """
         waypoints = []
         for wp in self.wps_dict["waypoints"]:
+            # attribute項目が辞書型形式（actionとvalue）になっているかチェック
+            attr = wp.get("attribute", {})
+            action = attr.get("action", "none")
+            value = attr.get("value", 0)
+
             waypoints.append({
                 "latitude": wp["latitude"],
                 "longitude": wp["longitude"],
-                "yaw": wp["yaw"]
+                "action": action,
+                "value": value
             })
         return waypoints
 
@@ -125,7 +129,7 @@ class GpsWpCommander(Node):
             # 1. 相対距離(dx, dy)を計算
             target_lat = wp["latitude"]
             target_lon = wp["longitude"]
-            target_yaw = wp["yaw"]
+            target_yaw = 0
 
             dx, dy = self.calculate_relative_xy(target_lat, target_lon)
             if dx is None:
@@ -160,13 +164,6 @@ class GpsWpCommander(Node):
             target_pose.pose.position.y = current_y - dy
             target_pose.pose.position.z = 0.0
 
-            # クォータニオンの計算
-            half_yaw = target_yaw * 0.5
-            target_pose.pose.orientation.x = 0.0
-            target_pose.pose.orientation.y = 0.0
-            target_pose.pose.orientation.z = math.sin(half_yaw)
-            target_pose.pose.orientation.w = math.cos(half_yaw)
-
             self.get_logger().info(f"Calculated Odom Target : X={target_pose.pose.position.x:.2f}, Y={target_pose.pose.position.y:.2f}")
 
             # 4. ナビゲーション命令を発行
@@ -180,6 +177,7 @@ class GpsWpCommander(Node):
             result = self.navigator.getResult()
             if result == TaskResult.SUCCEEDED:
                 self.get_logger().info(f'Waypoint {i+1} succeeded!')
+                self.execute_custom_task(wp["action"], wp["value"])
             elif result == TaskResult.CANCELED:
                 self.get_logger().warn(f'Waypoint {i+1} was canceled.')
                 break
@@ -192,8 +190,35 @@ class GpsWpCommander(Node):
 
         print("All GPS waypoints processed.")
 
+    def execute_custom_task(self, action, value):
+        """
+        到着したウェイポイントのactionとvalue（引数）に応じてタスクを実行する関数
+        """
+        self.get_logger().info(f"Executing task: Action=[{action}], Value=[{value}]")
 
-import threading  # スクリプト上部に追加してください
+        if action == "wait":
+            # 引数で渡された数値（秒）だけ動的に待機する
+            wait_time = float(value)
+            self.get_logger().info(f"[Task] Waiting for {wait_time} seconds...")
+            time.sleep(wait_time)
+            self.get_logger().info("Wait completed!")
+            
+        elif action == "spin":
+            # 引数で渡されたラジアン角だけ旋回する
+            spin_angle = float(value)
+            self.get_logger().info(f"[Task] Spinning for {spin_angle} radians...")
+            self.navigator.spin(spin_dist=spin_angle, time_allowance=15)
+            while not self.navigator.isTaskComplete():
+                time.sleep(0.1)
+            self.get_logger().info("Spin completed!")
+            
+        elif action == "none":
+            self.get_logger().info("Moving to next waypoint.")
+            
+        else:
+            self.get_logger().warn(f"Unknown action [{action}]. No action taken.")
+
+
 
 def main():
     rclpy.init()

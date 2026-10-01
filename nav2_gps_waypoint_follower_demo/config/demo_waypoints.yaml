@@ -1,16 +1,23 @@
 waypoints:
 - latitude:   38.4239058820883
   longitude:  110.78542291482245
-  yaw: 0.0
+  attribute:
+    action:   "spin"
+    value:    3.1415
+
 - latitude:   38.423909664299224
   longitude:  110.78528223528369
-  yaw: 1.57
+  attribute:  
+    action:   "wait"
+    value:    10
+
 - latitude:   38.423972353094726
   longitude:  110.78527218411496
-  yaw: 3.14
+  attribute: 
+    action:   "none"
+    
 - latitude:   38.42387283627202
   longitude:  110.78528855803214
-  yaw: 4.71
+
 - latitude:   38.4238167655048
   longitude:  110.7852112482218
-  yaw: 4.71
