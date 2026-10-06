@@ -28,10 +28,10 @@ def generate_launch_description():
     bringup_dir = get_package_share_directory('nav2_bringup')
     gps_wpf_dir = get_package_share_directory(
         "nav2_gps_waypoint_follower_demo")
-    sim_dir = get_package_share_directory(
-        "go2_config")
+    #sim_dir = get_package_share_directory(
+    #    "go2_config")
     nav2_launch_dir = os.path.join(gps_wpf_dir, 'launch')
-    sim_launch_dir = os.path.join(sim_dir, 'launch')
+    #sim_launch_dir = os.path.join(sim_dir, 'launch')
     params_dir = os.path.join(gps_wpf_dir, "config")
     nav2_params = os.path.join(params_dir, "nav2_no_map_params.yaml")
     configured_params = RewrittenYaml(
@@ -51,10 +51,10 @@ def generate_launch_description():
         default_value='False',
         description='Whether to start mapviz')
 
-    gazebo_cmd = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(sim_launch_dir, 'gazebo_velodyne.launch.py'))
-    )
+    #gazebo_cmd = IncludeLaunchDescription(
+    #    PythonLaunchDescriptionSource(
+    #        os.path.join(sim_launch_dir, 'gazebo_velodyne.launch.py'))
+    #)
 
     robot_localization_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -66,7 +66,7 @@ def generate_launch_description():
             os.path.join(bringup_dir, "launch", "navigation_launch.py")
         ),
         launch_arguments={
-            "use_sim_time": "True",
+            "use_sim_time": "False",
             "params_file": configured_params,
             "autostart": "True",
         }.items(),
@@ -88,7 +88,7 @@ def generate_launch_description():
     ld = LaunchDescription()
 
     # simulator launch
-    ld.add_action(gazebo_cmd)
+    #ld.add_action(gazebo_cmd)
 
     ld.add_action(declare_use_mapviz_cmd)
     ld.add_action(mapviz_cmd)

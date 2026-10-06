@@ -14,8 +14,10 @@ frame_id      = 'livox_frame'
 lvx_file_path = '/home/livox/livox_test.lvx'
 cmdline_bd_code = 'livox0000000001'
 
-cur_path = os.path.split(os.path.realpath(__file__))[0] + '/'
-cur_config_path = cur_path + '../config/livox_ros_driver2'
+
+
+pkg_dir = get_package_share_directory('g1_navigation')
+cur_config_path = os.path.join(pkg_dir, 'config', 'livox_ros_driver2')
 rviz_config_path = os.path.join(cur_config_path, 'display_point_cloud_ROS2.rviz')
 user_config_path = os.path.join(cur_config_path, 'MID360_config.json')
 ################### user configure parameters for ros2 end #####################

@@ -10,6 +10,7 @@ from launch_ros.actions import Node
 def generate_launch_description():
     cur_dir = get_package_share_directory('g1_navigation')
     nav2_dir = get_package_share_directory('nav2_gps_waypoint_follower_demo')
+    xacro_path = os.path.join(cur_dir, 'config', 'robot.urdf.xacro')
     #realsense_dir = get_package_share_directory('realsense_driver')
     #rl_params_file = os.path.join(gps_wpf_dir, "config", "dual_ekf_navsat_params.yaml")
 
@@ -22,6 +23,11 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(
             os.path.join(cur_dir, 'launch', 'septentrio_gnss_driver', 'g1_gnss.launch.py')
         )
+    )
+
+    livox_cmd = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(cur_dir, "launch", 'livox_ros_driver2', 'rviz_MID360_launch.py'))
     )
 
     nav2_cmd = IncludeLaunchDescription(
@@ -39,6 +45,26 @@ def generate_launch_description():
     return LaunchDescription([
 
     Node(
+        package='robot_state_publisher',
+        executable='robot_state_publisher',
+        name='robot_state_publisher',
+        output='screen',
+        parameters=[{
+            'robot_description': Command(['xacro', ' ', xacro_path])
+        }]
+    ),
+
+    Node(
+        package='micro_ros_agent',
+        executable='micro_ros_agent',
+        name='emergency_switch',
+        arguments=[
+            'serial',
+            '--dev', '/dev/ttyUSB0'
+        ],
+    ),v
+    
+    Node(
         package='unitree_ros2_example',
         executable='g1_high_level_ros2',
         name='cmdvel_control',
@@ -50,14 +76,13 @@ def generate_launch_description():
         name='gps_odom_filter',
     ),
 
-    Node(
-        package='g1_navigation',
-        executable='ros2serial',
-        name='emrgency_switch',
+    TimerAction(
+        period=2.0,
+        actions=[livox_cmd]
     ),
     
     TimerAction(
-        period=3.0,
+        period=4.0,
         actions=[gnss_cmd]
     ),
 

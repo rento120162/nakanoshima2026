@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<robot name="lio" xmlns:xacro="http://tixiaoshan.github.io/">
+  <xacro:property name="PI" value="3.1415926535897931" />
+
+  <link name="base_link"/>
+
+  <link name="lidar_link"> </link>
+  <joint name="lidar_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="lidar_link" />
+    <origin xyz="0 0 0.5" rpy="0 0 0" />
+  </joint>
+
+  
+  <link name="iPhone_link"> </link>
+  <joint name="iPhone_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="iPhone_link" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+  </joint>
+  
+
+  <link name="livox_frame"> </link>
+  <joint name="laser_joint" type="fixed">
+    <parent link="lidar_link" />
+    <child link="livox_frame" />
+    <origin xyz="0 0 0.0" rpy="0 0 0" />
+  </joint>
+
+
+  <link name="gnss_link"> </link>
+  <joint name="gnss_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="gnss_link" />
+    <origin xyz="0 0 0.63" rpy="0 0 0" />
+  </joint>
+
+</robot>
