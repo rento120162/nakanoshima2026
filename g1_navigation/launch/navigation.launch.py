@@ -62,7 +62,7 @@ def generate_launch_description():
             'serial',
             '--dev', '/dev/ttyUSB0'
         ],
-    ),v
+    ),
     
     Node(
         package='unitree_ros2_example',

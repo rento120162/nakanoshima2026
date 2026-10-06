@@ -50,16 +50,16 @@ def generate_launch_description():
             output='screen',
             arguments=['--display-config', rviz_config_path]
         )
+    
+    lidar_transform_node = Node(
+        package='g1_navigation',
+        executable='lidar_transformer',
+        name='lidar_transform',
+        output='screen'
+    )
 
     return LaunchDescription([
         livox_driver,
         livox_rviz,
-        # launch.actions.RegisterEventHandler(
-        #     event_handler=launch.event_handlers.OnProcessExit(
-        #         target_action=livox_rviz,
-        #         on_exit=[
-        #             launch.actions.EmitEvent(event=launch.events.Shutdown()),
-        #         ]
-        #     )
-        # )
+        lidar_transform_node,
     ])
