@@ -27,8 +27,8 @@ class YamlWaypointParser:
         """
         gepose_wps = []
         for wp in self.wps_dict["waypoints"]:
-            latitude, longitude, yaw = wp["latitude"], wp["longitude"], wp["yaw"]
-            gepose_wps.append(latLonYaw2Geopose(latitude, longitude, yaw))
+            latitude, longitude = wp["latitude"], wp["longitude"]
+            gepose_wps.append(latLonYaw2Geopose(latitude, longitude))
         return gepose_wps
 
 
@@ -83,7 +83,7 @@ def main():
     rclpy.init()
 
     # allow to pass the waypoints file as an argument
-    default_yaml_file_path = os.path.join(get_package_share_directory("nav2_gps_waypoint_follower_demo"), "config", "demo_waypoints.yaml")
+    default_yaml_file_path = os.path.join(get_package_share_directory("g1_navigation"), "config", "waypoints", "front_factory.yaml")
     if len(sys.argv) > 1:
         yaml_file_path = sys.argv[1]
     else:
