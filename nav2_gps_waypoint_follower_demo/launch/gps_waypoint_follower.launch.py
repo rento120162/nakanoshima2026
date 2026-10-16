@@ -89,7 +89,7 @@ def generate_launch_description():
     ld = LaunchDescription()
 
     # 1. シミュレータの起動 (即時)
-    ld.add_action(gazebo_cmd)
+    #ld.add_action(gazebo_cmd)
 
     # 2. Mapvizの起動 (5.0秒後に遅延起動)
     ld.add_action(declare_use_mapviz_cmd)
